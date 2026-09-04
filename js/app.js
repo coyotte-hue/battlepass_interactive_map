@@ -35,10 +35,23 @@ function getMapFromUrl() {
 }
 
 function updateLangSwitchUrl() {
+    // Nouveau sélecteur 3 langues (ko/en/fr)
+    const langSelect = document.getElementById('lang-switch-select');
+    if (langSelect) {
+        langSelect.value = currentLang;
+    }
+    // Compat ancien bouton unique
     const langBtn = document.getElementById('lang-switch-btn');
-    if (langBtn) {
+    if (langBtn && langData.langBtnTarget) {
         langBtn.href = `${langData.langBtnTarget}?map=${currentMapId}`;
     }
+}
+
+function switchLang(langCode) {
+    const target = (typeof getLangTarget === 'function')
+        ? getLangTarget(langCode)
+        : (langCode === 'ko' ? './index.html' : `./${langCode}.html`);
+    window.location.href = `${target}?map=${currentMapId}`;
 }
 
 function setupUI() {
@@ -50,7 +63,26 @@ function setupUI() {
     if (copyrightEl) copyrightEl.innerHTML = langData.copyright;
 
     const langBtn = document.getElementById('lang-switch-btn');
-    langBtn.innerText = langData.langBtnText;
+    if (langBtn && langData.langBtnText) {
+        langBtn.innerText = langData.langBtnText;
+    }
+
+    const langSelect = document.getElementById('lang-switch-select');
+    if (langSelect) {
+        const langs = (typeof AVAILABLE_LANGS !== 'undefined') ? AVAILABLE_LANGS : [
+            { code: 'ko', label: '한국어' },
+            { code: 'en', label: 'English' },
+            { code: 'fr', label: 'Français' }
+        ];
+        langSelect.innerHTML = '';
+        langs.forEach(({ code, label }) => {
+            const opt = document.createElement('option');
+            opt.value = code;
+            opt.textContent = (code === 'ko' ? '🌐 ' : code === 'en' ? '🌐 ' : '🌐 ') + label;
+            if (code === currentLang) opt.selected = true;
+            langSelect.appendChild(opt);
+        });
+    }
 
     const select = document.getElementById('map-select');
     select.innerHTML = '';
@@ -140,7 +172,7 @@ function addTemporaryMarker(coords) {
     const iconSrc = catInfo ? catInfo.icon : './assets/icons/temporary.png';
 
     const customIcon = L.divIcon({
-        html: `<img src="${iconSrc}" class="map-marker-img" onError="this.onerror=null; this.src='https://via.placeholder.com/20?text=📍';" />`,
+        html: `<img src="${iconSrc}" class="map-marker-img" loading="lazy" decoding="async" onError="this.onerror=null; this.src='https://via.placeholder.com/20?text=📍';" />`,
         className: 'custom-map-icon',
         iconSize: [20, 20],
         iconAnchor: [10, 10]
@@ -207,7 +239,7 @@ function openDetailModal(data) {
         imgList = [data.detailImg];
     }
 
-    const imgsHTML = imgList.map(src => `<img src="${src}" alt="detail screenshot" />`).join('');
+    const imgsHTML = imgList.map(src => `<img src="${src}" alt="detail screenshot" loading="lazy" decoding="async" />`).join('');
     const hasText = data.detailTitle || (langData.showDetailDesc && data.detailDesc);
 
     modalBody.innerHTML = `
@@ -317,7 +349,7 @@ function updateMapSpawnInfo() {
             const catInfo = CATEGORIES[catKey];
             if (catInfo) {
                 const spawnLabel = count > 1 ? 'Spawns' : 'Spawn';
-                html += `<li><img src="${catInfo.icon}" onError="this.style.display='none';" /> ${catInfo.name}: <strong style="color: #e5b35c; margin-left: 4px;">${count} ${spawnLabel}</strong></li>`;
+                html += `<li><img src="${catInfo.icon}" loading="lazy" decoding="async" onError="this.style.display='none';" /> ${catInfo.name}: <strong style="color: #e5b35c; margin-left: 4px;">${count} ${spawnLabel}</strong></li>`;
             }
         });
         html += `</ul>`;
@@ -350,7 +382,7 @@ function renderMarkers(markersData) {
         const iconSrc = catInfo ? catInfo.icon : '';
 
         const customIcon = L.divIcon({
-            html: `<img src="${iconSrc}" class="map-marker-img" onError="this.onerror=null; this.src='https://via.placeholder.com/20?text=📍';" />`,
+            html: `<img src="${iconSrc}" class="map-marker-img" loading="lazy" decoding="async" onError="this.onerror=null; this.src='https://via.placeholder.com/20?text=📍';" />`,
             className: 'custom-map-icon',
             iconSize: [20, 20],
             iconAnchor: [10, 10]
@@ -368,7 +400,7 @@ function renderMarkers(markersData) {
             });
         } else {
             if (data.previewImg) {
-                const tooltipHTML = `<div class="hover-photo-frame"><img src="${data.previewImg}" alt="preview" /></div>`;
+                const tooltipHTML = `<div class="hover-photo-frame"><img src="${data.previewImg}" alt="preview" loading="lazy" decoding="async" /></div>`;
 
                 marker.bindTooltip(tooltipHTML, {
                     className: 'custom-tooltip-photo',
@@ -499,7 +531,7 @@ function renderFilterUI() {
         item.innerHTML = `
             <input type="checkbox" value="${key}" ${isActive ? 'checked' : ''} ${shouldBeEnabled ? '' : 'disabled'} onchange="toggleCategory('${key}', this.checked, this.parentElement)">
             <span class="category-name" style="width: 100%;">
-                <img src="${cat.icon}" class="filter-icon-img" onError="this.style.display='none';" />
+                <img src="${cat.icon}" class="filter-icon-img" loading="lazy" decoding="async" onError="this.style.display='none';" />
                 <span class="category-text">${displayName}</span>
                 ${spawnBadge}
             </span>

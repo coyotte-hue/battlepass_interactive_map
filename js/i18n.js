@@ -9,6 +9,7 @@ const I18N = {
         coordText: (y, x) => `Y: ${y}, X: ${x} (클릭시 복사)`,
         copiedText: (coord) => `복사됨! -> ${coord}`,
         showDetailDesc: true, // 한국어 페이지: 상세 설명문 출력
+        tempMarkerTooltip: '임시 마커 (클릭하여 삭제)',
         mapNames: {
             customs: "Customs (세관)",
             ground_zero: "Ground Zero (그라운드 제로)",
@@ -47,6 +48,7 @@ const I18N = {
         coordText: (y, x) => `Y: ${y}, X: ${x} (Click to Copy)`,
         copiedText: (coord) => `Copied! -> ${coord}`,
         showDetailDesc: false, // 영문 페이지: 한국어 상세 설명문 생략
+        tempMarkerTooltip: 'Temporary Marker (Click to remove)',
         mapNames: {
             customs: "Customs",
             ground_zero: "Ground Zero",
@@ -74,5 +76,54 @@ const I18N = {
             temporary: { name: "Temporary", icon: "./assets/icons/temporary.png", desc: "Temporary Marker" }
         },
         copyright: "© 2026 EFT BP Map.<br>Fan-made map. Game assets © Battlestate Games."
+    },
+    fr: {
+        title: "Carte Docs Battle Pass",
+        subtitle: "Escape From Tarkov",
+        langBtnText: "🌐 EN",
+        langBtnTarget: "./en.html",
+        categoriesHeader: "Catégories",
+        raidSpawnsTitle: "🎲 Spawns de raid",
+        coordText: (y, x) => `Y: ${y}, X: ${x} (Cliquer pour copier)`,
+        copiedText: (coord) => `Copié ! -> ${coord}`,
+        showDetailDesc: false,
+        tempMarkerTooltip: 'Marqueur temporaire (Cliquer pour supprimer)',
+        mapNames: {
+            customs: "Customs",
+            ground_zero: "Ground Zero",
+            factory: "Factory",
+            icebreaker: "Icebreaker",
+            interchange: "Interchange",
+            lab: "The Lab",
+            labyrinth: "The Labyrinth",
+            lighthouse: "Lighthouse",
+            reserve: "Reserve",
+            shoreline: "Shoreline",
+            streets_of_tarkov: "Streets of Tarkov",
+            woods: "Woods"
+        },
+        categories: {
+            technical: { name: "Technical", icon: "./assets/icons/technical.webp", image: "./assets/category/technical.webp", desc: "Shoreline\n Woods\n Lighthouse" },
+            pmc: { name: "PMC", icon: "./assets/icons/pmc.webp", image: "./assets/category/pmc.webp", desc: "Reserve\n Icebreaker\n Lighthouse" },
+            project: { name: "Project", icon: "./assets/icons/project.webp", image: "./assets/category/project.webp", desc: "Reserve\n Customs\n Factory" },
+            blueprints: { name: "Blueprints", icon: "./assets/icons/blueprints.webp", image: "./assets/category/blueprints.webp", desc: "Interchange\n Factory\n The Labyrinth" },
+            test: { name: "Test", icon: "./assets/icons/test.webp", image: "./assets/category/test.webp", desc: "Shoreline\n Woods\n Icebreaker" },
+            user: { name: "User", icon: "./assets/icons/user.webp", image: "./assets/category/user.webp", desc: "Streets of Tarkov\n Ground Zero\n The Lab" },
+            medical: { name: "Medical", icon: "./assets/icons/medical.webp", image: "./assets/category/medical.webp", desc: "The Labyrinth\n Ground Zero\n The Lab" },
+            financial: { name: "Financial", icon: "./assets/icons/financial.webp", image: "./assets/category/financial.webp", desc: "Customs\n Streets of Tarkov\n Interchange" },
+            transit: { name: "Transit", icon: "./assets/icons/transit.webp", image: "./assets/category/transit.webp", desc: "Point de transit" },
+            temporary: { name: "Temporaire", icon: "./assets/icons/temporary.png", desc: "Marqueur temporaire" }
+        },
+        copyright: "© 2026 EFT BP Map.<br>Carte fan-made. Assets du jeu © Battlestate Games."
     }
 };
+
+const AVAILABLE_LANGS = [
+    { code: 'ko', label: '한국어' },
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' }
+];
+
+function getLangTarget(langCode) {
+    return langCode === 'ko' ? './index.html' : `./${langCode}.html`;
+}

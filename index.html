@@ -16,9 +16,10 @@
     <meta property="og:description" content="타르코프 배틀패스 문서 인터랙티브 맵을 확인하세요. (8가지 문서 카테고리 지원)">
     <meta property="og:image" content="./assets/category/blueprints.webp">
 
-    <link rel="alternate" hreflang="ko" href="https://perofunyang.github.io/battlepass-map/" />
-    <link rel="alternate" hreflang="en" href="https://perofunyang.github.io/battlepass-map/en.html" />
-    <link rel="alternate" hreflang="x-default" href="https://perofunyang.github.io/battlepass-map/en.html" />
+    <link rel="alternate" hreflang="ko" href="https://perofunyang.github.io/battlepass_interactive_map/" />
+    <link rel="alternate" hreflang="en" href="https://perofunyang.github.io/battlepass_interactive_map/en.html" />
+    <link rel="alternate" hreflang="fr" href="https://perofunyang.github.io/battlepass_interactive_map/fr.html" />
+    <link rel="alternate" hreflang="x-default" href="https://perofunyang.github.io/battlepass_interactive_map/en.html" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="./css/style.css" />
@@ -45,7 +46,7 @@
             <h2 id="ui-title"></h2>
             <div class="sub-title-row">
                 <span id="ui-subtitle" class="sub-title"></span>
-                <a href="#" id="lang-switch-btn" class="lang-btn"></a>
+                <select id="lang-switch-select" class="lang-btn lang-select" onchange="switchLang(this.value)" aria-label="Language"></select>
             </div>
 
             <select id="map-select" class="map-select-box" onchange="switchMap(this.value)"></select>
@@ -69,7 +70,7 @@
     </div>
 
     <div id="global-category-preview">
-        <img id="global-preview-img" src="" alt="preview" />
+        <img id="global-preview-img" src="" alt="preview" loading="lazy" decoding="async" />
         <div id="global-preview-desc"></div>
     </div>
 

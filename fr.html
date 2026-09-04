@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,13 @@
     <meta name="google-site-verification" content="Zb8IY_JkwSI9LmBgIlh9LFJcXQjCB8c6IFP7W8GWMpI" />
     <meta name="naver-site-verification" content="082327acf711127d70357c418344a9453ed9ff8d" />
 
-    <title>EFT Battle Pass Document Interactive Map | Tarkov Doc Map</title>
-    <meta name="description" content="Interactive map for Escape From Tarkov Battle Pass Documents. Precise spawn locations for Technical, PMC, Project, Blueprints, Test, User, Medical, Financial documents across all maps.">
-    <meta name="keywords" content="Tarkov Battle Pass Map, EFT Battle Pass Documentation Interactive Map, Tarkov Document Map, Escape From Tarkov Map, Tarkov Document Spawns, EFT Document Locations">
+    <title>Carte Interactive Documents Battle Pass EFT | Tarkov Doc Map</title>
+    <meta name="description" content="Carte interactive des documents Battle Pass de Escape From Tarkov. Positions précises des spawns Technical, PMC, Project, Blueprints, Test, User, Medical, Financial sur toutes les maps.">
+    <meta name="keywords" content="Tarkov Battle Pass Map FR, Carte Battle Pass Tarkov, EFT Battle Pass Documentation carte interactive, Tarkov Document Map, Escape From Tarkov Map, Tarkov Document Spawns FR">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="EFT Battle Pass Documentation Interactive Map">
-    <meta property="og:description" content="Find all Battle Pass Document spawn locations in Escape From Tarkov. Interactive map for all 8 document types.">
+    <meta property="og:title" content="Carte Interactive Documents Battle Pass EFT">
+    <meta property="og:description" content="Trouvez tous les spawns de documents Battle Pass dans Escape From Tarkov. Carte interactive pour les 8 types de documents.">
     <meta property="og:image" content="./assets/category/blueprints.webp">
 
     <link rel="alternate" hreflang="ko" href="https://perofunyang.github.io/battlepass_interactive_map/" />
@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="./css/style.css" />
 
-    <!-- 🌟 [추가] 브라우저 탭 파비콘 (Favicon) 설정 -->
     <link rel="icon" type="image/webp" href="./assets/icons/test.webp">
 </head>
 
@@ -40,13 +39,13 @@
 <body>
 
     <div id="sidebar">
-        <button id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Toggle Sidebar">◀</button>
+        <button id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Afficher / masquer">◀</button>
 
         <div class="sidebar-header">
             <h2 id="ui-title"></h2>
             <div class="sub-title-row">
                 <span id="ui-subtitle" class="sub-title"></span>
-                <select id="lang-switch-select" class="lang-btn lang-select" onchange="switchLang(this.value)" aria-label="Language"></select>
+                <select id="lang-switch-select" class="lang-btn lang-select" onchange="switchLang(this.value)" aria-label="Langue"></select>
             </div>
 
             <select id="map-select" class="map-select-box" onchange="switchMap(this.value)"></select>
@@ -82,7 +81,7 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>window.CURRENT_LANG = 'en';</script>
+    <script>window.CURRENT_LANG = 'fr';</script>
     <script src="./js/i18n.js"></script>
     <script src="./js/app.js"></script>
 </body>
