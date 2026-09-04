@@ -317,6 +317,14 @@ td.spec{ color:var(--steel); }
 .mods-legend i{ width:10px; height:10px; display:inline-block; }
 .mods-legend i.pos{ background:var(--danger); }
 .mods-legend i.neg{ background:var(--olive); }
+.mods-group-title{
+  position:sticky; top:52px; z-index:5;
+  font-family:'Oswald'; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+  padding:8px 12px; margin-top:14px; background:var(--panel-2); border:1px solid var(--line);
+}
+.mods-group-title:first-child{ margin-top:0; }
+.mods-group-title.pos{ color:var(--danger); border-left:3px solid var(--danger); }
+.mods-group-title.neg{ color:var(--olive); border-left:3px solid var(--olive); }
 
 /* footer */
 footer{ padding:40px 0 60px; }
@@ -612,10 +620,63 @@ a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-off
 
       <div class="mods-panel">
         <h3>Modificateurs personnels — bonus &amp; malus</h3>
-        <div class="sub">À la création, vous répartissez un budget de points : les bonus coûtent des points, les malus en rapportent. Le solde final doit rester à zéro ou plus — et le choix est verrouillé pour toute la saison. Il existe 19 bonus et 14 malus au total, quelques exemples ci-dessous.</div>
+        <div class="sub">À la création, vous répartissez un budget de points : les bonus coûtent des points, les malus en rapportent. Le solde final doit rester à zéro ou plus — et le choix est verrouillé pour toute la saison. Liste complète ci-dessous : 19 bonus et 14 malus.</div>
         <div class="mods-list">
+          <div class="mods-group-title pos">Bonus — coûtent des points (19)</div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Street Tax</div><div class="m-desc">Des Scavs vous versent une protection une fois par semaine</div></div>
+            <div class="mod-cost pos">− 1 pt</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Lucky</div><div class="m-desc">Effet mystérieux (Audentes fortuna iuvat !)</div></div>
+            <div class="mod-cost pos">− 1 pt</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Diet</div><div class="m-desc">Provisions consommées 50% moins vite</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Juice Time</div><div class="m-desc">Boire un jus donne l'effet antidouleur pendant 60 s</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Sailor's Nostalgia</div><div class="m-desc">Le poisson en conserve donne régénération +2 pendant 30 s</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Hypodipsia</div><div class="m-desc">Hydratation consommée 20% moins vite</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Polyphagia</div><div class="m-desc">Énergie consommée 20% moins vite</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Thrombophilia</div><div class="m-desc">Risque de saignement réduit de 25%</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">The Tarkov Shooter</div><div class="m-desc">Compétence fusils à verrou x2, démarre au niveau 25</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Marathon Runner</div><div class="m-desc">Endurance bras/jambes consommée 20% moins vite</div></div>
+            <div class="mod-cost pos">− 3 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Sturdy Bones</div><div class="m-desc">Fractures et dégâts de chute réduits</div></div>
+            <div class="mod-cost pos">− 3 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Sprinter</div><div class="m-desc">Vitesse de course augmentée de 5%</div></div>
+            <div class="mod-cost pos">− 3 pts</div>
+          </div>
           <div class="mod-row pos">
             <div><div class="m-name">Bushborne</div><div class="m-desc">Bruit et ralentissement dans la végétation réduits de 75%</div></div>
+            <div class="mod-cost pos">− 5 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Safecracker</div><div class="m-desc">25% de chance de ne pas user les clés mécaniques</div></div>
             <div class="mod-cost pos">− 5 pts</div>
           </div>
           <div class="mod-row pos">
@@ -623,20 +684,77 @@ a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-off
             <div class="mod-cost pos">− 5 pts</div>
           </div>
           <div class="mod-row pos">
-            <div><div class="m-name">The Tarkov Shooter</div><div class="m-desc">Compétence fusils à verrou x2, démarre au niveau 25</div></div>
-            <div class="mod-cost pos">− 2 pts</div>
+            <div><div class="m-name">Youth</div><div class="m-desc">Énergie consommée 20% moins vite, endurance +10</div></div>
+            <div class="mod-cost pos">− 5 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Prodigy</div><div class="m-desc">Expérience de compétence augmentée de 30%</div></div>
+            <div class="mod-cost pos">− 5 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Average</div><div class="m-desc">Toutes les compétences au niveau 25, bloquées (sauf Artisanat)</div></div>
+            <div class="mod-cost pos">− 12 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Kappa Protocol</div><div class="m-desc">Conteneur sécurisé Kappa reçu immédiatement</div></div>
+            <div class="mod-cost pos">− 12 pts</div>
+          </div>
+          <div class="mods-group-title neg">Malus — rapportent des points (14)</div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Dr. Jekyll</div><div class="m-desc">La Blessure fraîche ne part plus jusqu'à la fin du raid</div></div>
+            <div class="mod-cost neg">+ 1 pt</div>
           </div>
           <div class="mod-row neg">
-            <div><div class="m-name">No Flea Market</div><div class="m-desc">Accès au marché aux puces totalement désactivé</div></div>
-            <div class="mod-cost neg">+ 10 pts</div>
+            <div><div class="m-name">Third Leg</div><div class="m-desc">Vitesse −1%, prix Therapist −5%</div></div>
+            <div class="mod-cost neg">+ 1 pt</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Unlucky</div><div class="m-desc">La malchance peut avoir de lourdes conséquences</div></div>
+            <div class="mod-cost neg">+ 1 pt</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Hemophilia</div><div class="m-desc">Risque de saignement augmenté de 25%</div></div>
+            <div class="mod-cost neg">+ 2 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Well That Hurt!</div><div class="m-desc">Les kits médicaux consomment 25% de ressources en plus</div></div>
+            <div class="mod-cost neg">+ 2 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Personality Vacuum</div><div class="m-desc">Charisme bloqué, prix marchands +20%</div></div>
+            <div class="mod-cost neg">+ 2 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Chronic Fatigue Syndrome</div><div class="m-desc">Énergie consommée 20% plus vite</div></div>
+            <div class="mod-cost neg">+ 2 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Polydipsia</div><div class="m-desc">Hydratation consommée 15% plus vite</div></div>
+            <div class="mod-cost neg">+ 2 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Allergic</div><div class="m-desc">Allergique à 3 objets aléatoires (provisions ou médicaments)</div></div>
+            <div class="mod-cost neg">+ 3 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Osteoporosis</div><div class="m-desc">Fractures +25%, dégâts de chute +20%</div></div>
+            <div class="mod-cost neg">+ 3 pts</div>
           </div>
           <div class="mod-row neg">
             <div><div class="m-name">Exhaustion</div><div class="m-desc">Endurance bras/jambes réduite de 10 et récupérée 20% moins vite</div></div>
             <div class="mod-cost neg">+ 5 pts</div>
           </div>
           <div class="mod-row neg">
-            <div><div class="m-name">Allergic</div><div class="m-desc">Allergique à 3 objets aléatoires (provisions ou médicaments)</div></div>
-            <div class="mod-cost neg">+ 3 pts</div>
+            <div><div class="m-name">Broken Secure Container</div><div class="m-desc">Conteneur limité : cash, clés, plaques et équipement spécial</div></div>
+            <div class="mod-cost neg">+ 6 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">No Flea Market</div><div class="m-desc">Accès au marché aux puces totalement désactivé</div></div>
+            <div class="mod-cost neg">+ 10 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Incompetent</div><div class="m-desc">Compétences +25% plus lentes, plafonnées au niveau 30</div></div>
+            <div class="mod-cost neg">+ 10 pts</div>
           </div>
         </div>
         <div class="mods-legend">
