@@ -612,30 +612,30 @@ a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-off
 
       <div class="mods-panel">
         <h3>Modificateurs personnels — bonus &amp; malus</h3>
-        <div class="sub">À la création, vous répartissez un budget de points : les bonus coûtent des points, les malus en rapportent. Le solde final doit rester à zéro ou plus — et le choix est verrouillé pour toute la saison.</div>
+        <div class="sub">À la création, vous répartissez un budget de points : les bonus coûtent des points, les malus en rapportent. Le solde final doit rester à zéro ou plus — et le choix est verrouillé pour toute la saison. Il existe 19 bonus et 14 malus au total, quelques exemples ci-dessous.</div>
         <div class="mods-list">
           <div class="mod-row pos">
-            <div><div class="m-name">Bushborne</div><div class="m-desc">Furtivité et mobilité accrues dans les buissons</div></div>
+            <div><div class="m-name">Bushborne</div><div class="m-desc">Bruit et ralentissement dans la végétation réduits de 75%</div></div>
             <div class="mod-cost pos">− 5 pts</div>
           </div>
           <div class="mod-row pos">
             <div><div class="m-name">Hercules</div><div class="m-desc">Force et Endurance au niveau 15 dès le départ</div></div>
-            <div class="mod-cost pos">− 3 pts</div>
+            <div class="mod-cost pos">− 5 pts</div>
           </div>
           <div class="mod-row pos">
-            <div><div class="m-name">The Tarkov Shooter</div><div class="m-desc">Compétence fusils à verrou x2, démarre au niveau 10</div></div>
-            <div class="mod-cost pos">− coût variable</div>
+            <div><div class="m-name">The Tarkov Shooter</div><div class="m-desc">Compétence fusils à verrou x2, démarre au niveau 25</div></div>
+            <div class="mod-cost pos">− 2 pts</div>
           </div>
           <div class="mod-row neg">
             <div><div class="m-name">No Flea Market</div><div class="m-desc">Accès au marché aux puces totalement désactivé</div></div>
-            <div class="mod-cost neg">+ 6 pts</div>
+            <div class="mod-cost neg">+ 10 pts</div>
           </div>
           <div class="mod-row neg">
-            <div><div class="m-name">Exhaustion</div><div class="m-desc">Fatigue et faim se vident plus vite qu'en temps normal</div></div>
-            <div class="mod-cost neg">+ 4 pts</div>
+            <div><div class="m-name">Exhaustion</div><div class="m-desc">Endurance bras/jambes réduite de 10 et récupérée 20% moins vite</div></div>
+            <div class="mod-cost neg">+ 5 pts</div>
           </div>
           <div class="mod-row neg">
-            <div><div class="m-name">Allergic</div><div class="m-desc">Deux types d'objets consommables deviennent inutilisables</div></div>
+            <div><div class="m-name">Allergic</div><div class="m-desc">Allergique à 3 objets aléatoires (provisions ou médicaments)</div></div>
             <div class="mod-cost neg">+ 3 pts</div>
           </div>
         </div>
@@ -739,14 +739,14 @@ a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-off
     <div class="two-col">
       <div class="kb-panel">
         <h3>Raccourcis essentiels</h3>
-        <div class="kb-row"><span>Position accroupie</span><span class="key">Ctrl</span></div>
-        <div class="kb-row"><span>Marche silencieuse</span><span class="key">Maj (maintenu)</span></div>
+        <div class="kb-row"><span>Position accroupie</span><span class="key">C</span></div>
+        <div class="kb-row"><span>Marche lente / silencieuse</span><span class="key">Verr Maj</span></div>
         <div class="kb-row"><span>Position penchée</span><span class="key">Q / E</span></div>
-        <div class="kb-row"><span>Retenir la respiration (visée)</span><span class="key">Clic droit maintenu</span></div>
+        <div class="kb-row"><span>Retenir la respiration (visée)</span><span class="key">Alt</span></div>
         <div class="kb-row"><span>Ouvrir l'inventaire</span><span class="key">Tab</span></div>
-        <div class="kb-row"><span>Vérifier une arme (munitions)</span><span class="key">Clic droit sur l'arme</span></div>
+        <div class="kb-row"><span>Vérifier les munitions (chargeur)</span><span class="key">Alt + T</span></div>
         <div class="kb-row"><span>Interagir / fouiller</span><span class="key">F</span></div>
-        <div class="kb-row"><span>Bandage rapide</span><span class="key">Menu médical</span></div>
+        <div class="kb-row"><span>Soin rapide</span><span class="key">Médicament (4-0)</span></div>
       </div>
       <div class="loot-panel">
         <h3>Petit loot toujours rentable</h3>
@@ -788,8 +788,8 @@ a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-off
     { extract: "Cellars", map: "Factory" },
     { extract: "Tunnel", map: "Shoreline" },
     { extract: "Railway", map: "Interchange" },
-    { extract: "Power Line", map: "Interchange" },
-    { extract: "Lighthouse Saferoom", map: "Lighthouse" },
+    { extract: "Power Station", map: "Interchange" },
+    { extract: "Armored Train", map: "Lighthouse" },
   ];
 
   const allMaps = ["Customs","Woods","Factory","Shoreline","Interchange","Reserve","Lighthouse","Streets of Tarkov","The Lab"];
