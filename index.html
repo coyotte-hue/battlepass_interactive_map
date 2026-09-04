@@ -1,89 +1,849 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NORVINSK // Dossier du survivant — Fan site Escape from Tarkov</title>
+<meta name="description" content="Fan site francophone Escape from Tarkov : guide débutant, cartes, marchands, actus 2026, saison Kord Breach et carte interactive des documents Battle Pass.">
+<meta property="og:title" content="NORVINSK // Dossier du survivant — Fan site Tarkov">
+<meta property="og:description" content="Guide, cartes, marchands et carte interactive Battle Pass pour Escape from Tarkov.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
-    <meta name="google-site-verification" content="Zb8IY_JkwSI9LmBgIlh9LFJcXQjCB8c6IFP7W8GWMpI" />
-    <meta name="naver-site-verification" content="082327acf711127d70357c418344a9453ed9ff8d" />
+:root{
+  --bg: #14171a;
+  --panel: #1b1f22;
+  --panel-2: #21262a;
+  --line: #33393e;
+  --amber: #ff9a1f;
+  --amber-dim: #b06c15;
+  --olive: #8a9a5b;
+  --bone: #e9e6db;
+  --steel: #8b939a;
+  --danger: #c1453b;
+}
 
-    <title>타르코프 배틀패스 문서 인터랙티브 맵 | EFT Battle Pass Map</title>
-    <meta name="description" content="EFT Battle Pass Documentation Interactive Map | 이스케이프 프롬 타르코프 배틀패스 문서 스폰 위치 전용 지도. Technical, PMC, Project, Blueprints, Test, User, Medical, Financial 총 8종 문서 위치 정밀 제공.">
-    <meta name="keywords" content="타르코프 배틀패스, 타르코프 문서 위치, 타르코프 문서 지도, EFT Battle Pass Documentation Interactive Map, Tarkov Document Map, Escape From Tarkov Map">
+*{box-sizing:border-box; margin:0; padding:0;}
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="타르코프 배틀패스 인터랙티브 맵 | EFT Battle Pass Map">
-    <meta property="og:description" content="타르코프 배틀패스 문서 인터랙티브 맵을 확인하세요. (8가지 문서 카테고리 지원)">
-    <meta property="og:image" content="./assets/category/blueprints.webp">
+html{scroll-behavior:smooth;}
 
-    <link rel="alternate" hreflang="ko" href="https://perofunyang.github.io/battlepass_interactive_map/" />
-    <link rel="alternate" hreflang="en" href="https://perofunyang.github.io/battlepass_interactive_map/en.html" />
-    <link rel="alternate" hreflang="fr" href="https://perofunyang.github.io/battlepass_interactive_map/fr.html" />
-    <link rel="alternate" hreflang="x-default" href="https://perofunyang.github.io/battlepass_interactive_map/en.html" />
+body{
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(255,154,31,0.05), transparent 40%),
+    var(--bg);
+  color:var(--bone);
+  font-family:'Oswald', sans-serif;
+  font-weight:400;
+  line-height:1.5;
+}
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="./css/style.css" />
+.mono{ font-family:'IBM Plex Mono', monospace; }
+.stencil{ font-family:'Black Ops One', sans-serif; }
 
-    <!-- 🌟 [추가] 브라우저 탭 파비콘 (Favicon) 설정 -->
-    <link rel="icon" type="image/webp" href="./assets/icons/test.webp">
+::selection{ background:var(--amber); color:#14171a; }
+
+a{ color:inherit; }
+
+.wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+/* ---------- top ticker ---------- */
+.ticker-bar{
+  background:#0f1113;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  white-space:nowrap;
+  padding:7px 0;
+}
+.ticker-track{
+  display:inline-block;
+  padding-left:100%;
+  animation: ticker 32s linear infinite;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.04em;
+  color:var(--steel);
+}
+.ticker-track span{ color:var(--amber); margin:0 8px; }
+@keyframes ticker{ 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
+
+/* ---------- nav ---------- */
+header.site{
+  position:sticky; top:0; z-index:50;
+  background:rgba(20,23,26,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 24px; max-width:1180px; margin:0 auto;
+}
+.brand{
+  font-family:'Black Ops One', sans-serif;
+  font-size:18px;
+  letter-spacing:0.03em;
+  display:flex; align-items:center; gap:10px;
+}
+.brand .dot{ width:9px; height:9px; background:var(--amber); border-radius:1px; box-shadow:0 0 8px var(--amber); }
+.navlinks{ display:flex; gap:26px; list-style:none; }
+.navlinks a{
+  text-decoration:none; font-size:13px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--steel); font-weight:500; transition:color .15s;
+  border-bottom:2px solid transparent; padding-bottom:3px;
+}
+.navlinks a:hover{ color:var(--amber); border-color:var(--amber); }
+.navlinks{ display:none; }
+@media(min-width:860px){ .navlinks{ display:flex; } }
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(20,23,26,0) 0%, var(--bg) 92%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 34px);
+  padding:72px 24px 0;
+  overflow:hidden;
+}
+.hero-inner{ max-width:1180px; margin:0 auto; }
+.eyebrow-row{
+  display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--olive); letter-spacing:0.08em;
+}
+.eyebrow-row::before{ content:''; width:22px; height:1px; background:var(--olive); }
+.hero h1{
+  font-family:'Black Ops One', sans-serif;
+  font-size:clamp(38px, 7vw, 84px);
+  line-height:0.98;
+  letter-spacing:0.01em;
+  color:var(--bone);
+  text-shadow: 3px 3px 0 rgba(255,154,31,0.18);
+}
+.hero h1 .accent{ color:var(--amber); }
+.hero p.lead{
+  max-width:560px; margin-top:22px; font-size:17px; color:var(--steel); font-weight:400;
+}
+.hero-ctas{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+.btn{
+  font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+  font-size:13px; padding:13px 22px; text-decoration:none; display:inline-block;
+  border:1px solid var(--amber); color:var(--bg); background:var(--amber);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition:transform .12s, box-shadow .12s;
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:0 6px 0 rgba(0,0,0,0.35); }
+.btn.ghost{ background:transparent; color:var(--bone); border-color:var(--line); }
+.btn.ghost:hover{ border-color:var(--amber); color:var(--amber); }
+
+/* ---------- extraction quiz (signature element) ---------- */
+.extract-board{
+  margin-top:56px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.extract-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 18px; border-bottom:1px solid var(--line);
+  font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; color:var(--steel);
+}
+.extract-head .score{ color:var(--amber); display:flex; align-items:center; gap:6px; }
+.extract-head .score::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--amber); }
+.quiz-body{ padding:22px 18px 24px; }
+.quiz-prompt{
+  font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--steel); letter-spacing:0.08em;
+  text-transform:uppercase; margin-bottom:8px;
+}
+.quiz-extract-name{
+  font-family:'Oswald'; font-weight:600; font-size:22px; color:var(--bone); margin-bottom:18px;
+  letter-spacing:0.01em;
+}
+.quiz-options{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:420px){ .quiz-options{ grid-template-columns:1fr; } }
+.quiz-opt{
+  font-family:'IBM Plex Mono', monospace; font-size:13px; text-align:left;
+  background:var(--panel-2); border:1px solid var(--line); color:var(--bone);
+  padding:12px 14px; cursor:pointer; letter-spacing:0.02em; transition:border-color .12s, background .12s;
+}
+.quiz-opt:hover:not(:disabled){ border-color:var(--amber-dim); }
+.quiz-opt:disabled{ cursor:default; }
+.quiz-opt.correct{ border-color:var(--olive); background:rgba(138,154,91,0.15); color:var(--olive); }
+.quiz-opt.wrong{ border-color:var(--danger); background:rgba(193,69,59,0.15); color:var(--danger); }
+.quiz-footer{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
+.quiz-feedback{ font-family:'IBM Plex Mono'; font-size:12px; color:var(--steel); min-height:16px; }
+.quiz-next{
+  font-family:'Oswald'; font-weight:600; font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase;
+  background:transparent; border:1px solid var(--amber); color:var(--amber); padding:9px 16px; cursor:pointer;
+  display:none;
+}
+.quiz-next:hover{ background:var(--amber); color:var(--bg); }
+
+/* ---------- sections ---------- */
+section{ padding:88px 0; border-bottom:1px solid var(--line); }
+.sec-head{ margin-bottom:44px; max-width:640px; }
+.sec-eyebrow{
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); letter-spacing:0.12em;
+  text-transform:uppercase; display:block; margin-bottom:10px;
+}
+.sec-head h2{
+  font-family:'Black Ops One', sans-serif; font-size:clamp(26px,4vw,40px); line-height:1.08;
+}
+.sec-head p{ color:var(--steel); margin-top:14px; font-size:15.5px; }
+
+/* intro grid */
+.intro-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+@media(min-width:760px){ .intro-grid{ grid-template-columns:repeat(3,1fr); } }
+.intro-card{
+  background:var(--panel); border:1px solid var(--line); padding:24px;
+  border-left:3px solid var(--amber);
+}
+.intro-card h3{ font-family:'Oswald'; font-weight:600; font-size:16px; letter-spacing:0.03em; margin-bottom:10px; text-transform:uppercase; color:var(--bone); }
+.intro-card p{ color:var(--steel); font-size:14px; }
+
+/* maps */
+.maps-grid{ display:grid; grid-template-columns:1fr; gap:16px; }
+@media(min-width:640px){ .maps-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(min-width:1000px){ .maps-grid{ grid-template-columns:repeat(3,1fr); } }
+.map-card{
+  background:var(--panel); border:1px solid var(--line); padding:20px 20px 22px;
+  position:relative; transition:border-color .15s, transform .15s;
+}
+.map-card:hover{ border-color:var(--amber-dim); transform:translateY(-3px); }
+.map-card.new::after{
+  content:'NOUVEAU 2026'; position:absolute; top:14px; right:14px;
+  font-family:'IBM Plex Mono'; font-size:10px; color:var(--amber); border:1px solid var(--amber);
+  padding:3px 6px; letter-spacing:0.06em;
+}
+.map-card h3{ font-family:'Oswald'; font-weight:600; font-size:19px; margin-bottom:6px; }
+.map-meta{ display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+.pill{
+  font-family:'IBM Plex Mono'; font-size:10.5px; color:var(--steel);
+  border:1px solid var(--line); padding:3px 8px; letter-spacing:0.04em;
+}
+.map-card p{ color:var(--steel); font-size:13.5px; }
+.difficulty{ display:flex; gap:4px; margin-top:14px; }
+.difficulty i{ width:16px; height:5px; background:var(--line); display:block; }
+.difficulty i.on{ background:var(--danger); }
+.map-link{
+  display:inline-block; margin-top:12px;
+  font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--amber); text-decoration:none; border-bottom:1px solid var(--amber-dim); padding-bottom:2px;
+}
+.map-link:hover{ color:var(--bone); border-color:var(--bone); }
+
+/* news log */
+.log-list{ border-left:2px solid var(--line); }
+.log-item{ position:relative; padding:4px 0 26px 26px; }
+.log-item::before{
+  content:''; position:absolute; left:-6px; top:5px; width:10px; height:10px;
+  background:var(--bg); border:2px solid var(--amber);
+}
+.log-item .date{ font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--amber); letter-spacing:0.06em; }
+.log-item h4{ font-family:'Oswald'; font-weight:600; font-size:16.5px; margin:5px 0 6px; }
+.log-item p{ color:var(--steel); font-size:14px; max-width:640px; }
+
+/* guide steps */
+.steps{ counter-reset:step; display:grid; gap:2px; }
+.step{
+  display:grid; grid-template-columns:64px 1fr; gap:20px;
+  background:var(--panel); border:1px solid var(--line); padding:22px 24px;
+}
+.step .num{
+  font-family:'Black Ops One'; font-size:26px; color:var(--amber-dim); line-height:1;
+}
+.step h4{ font-family:'Oswald'; font-weight:600; font-size:17px; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.02em; }
+.step p{ color:var(--steel); font-size:14.5px; }
+
+/* traders table */
+.table-wrap{ overflow-x:auto; border:1px solid var(--line); }
+table{ width:100%; border-collapse:collapse; min-width:640px; }
+th{
+  font-family:'IBM Plex Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--amber); text-align:left; padding:12px 16px; background:var(--panel-2); border-bottom:1px solid var(--line);
+}
+td{ padding:13px 16px; font-size:14px; color:var(--bone); border-bottom:1px solid rgba(255,255,255,0.04); }
+tr:last-child td{ border-bottom:none; }
+td.spec{ color:var(--steel); }
+
+/* two column: keybinds + loot */
+.two-col{ display:grid; grid-template-columns:1fr; gap:18px; }
+@media(min-width:800px){ .two-col{ grid-template-columns:1.1fr 0.9fr; } }
+.kb-panel{ background:var(--panel); border:1px solid var(--line); padding:26px; }
+.kb-panel h3{ font-family:'Oswald'; font-weight:600; margin-bottom:16px; text-transform:uppercase; font-size:15px; letter-spacing:0.03em; color:var(--amber); }
+.kb-row{ display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--line); font-size:13.5px; }
+.kb-row:last-child{ border-bottom:none; }
+.kb-row .key{ font-family:'IBM Plex Mono'; background:var(--panel-2); border:1px solid var(--line); padding:2px 8px; font-size:12px; color:var(--bone); }
+
+.loot-panel{ background:var(--panel); border:1px solid var(--line); padding:26px; }
+.loot-panel h3{ font-family:'Oswald'; font-weight:600; margin-bottom:16px; text-transform:uppercase; font-size:15px; letter-spacing:0.03em; color:var(--olive); }
+.loot-item{ display:flex; gap:10px; align-items:baseline; padding:7px 0; font-size:13.5px; color:var(--steel); }
+.loot-item b{ color:var(--bone); font-weight:600; min-width:130px; }
+
+/* season character */
+.season-banner{
+  display:flex; align-items:center; gap:10px; margin-bottom:36px;
+  font-family:'IBM Plex Mono'; font-size:12px; color:var(--amber); letter-spacing:0.06em;
+  border:1px solid var(--amber-dim); padding:10px 16px; background:rgba(255,154,31,0.06);
+}
+.season-two-col{ display:grid; grid-template-columns:1fr; gap:18px; }
+@media(min-width:820px){ .season-two-col{ grid-template-columns:0.85fr 1.15fr; } }
+.global-panel{ background:var(--panel); border:1px solid var(--line); padding:24px; }
+.global-panel h3{ font-family:'Oswald'; font-weight:600; text-transform:uppercase; font-size:14.5px; letter-spacing:0.03em; color:var(--bone); margin-bottom:16px; }
+.global-panel h3 span{ color:var(--steel); font-weight:400; text-transform:none; font-size:12px; }
+.global-row{ padding:11px 0; border-bottom:1px dashed var(--line); }
+.global-row:last-child{ border-bottom:none; }
+.global-row .g-name{ font-family:'Oswald'; font-weight:600; font-size:14.5px; color:var(--amber); }
+.global-row p{ color:var(--steel); font-size:13px; margin-top:3px; }
+
+.mods-panel{ background:var(--panel); border:1px solid var(--line); padding:24px; }
+.mods-panel h3{ font-family:'Oswald'; font-weight:600; text-transform:uppercase; font-size:14.5px; letter-spacing:0.03em; color:var(--bone); margin-bottom:6px; }
+.mods-panel .sub{ color:var(--steel); font-size:12.5px; margin-bottom:16px; }
+.mods-list{ display:grid; gap:8px; }
+.mod-row{
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  padding:10px 12px; background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--line);
+}
+.mod-row.pos{ border-left-color:var(--danger); }
+.mod-row.neg{ border-left-color:var(--olive); }
+.mod-row .m-name{ font-family:'Oswald'; font-weight:500; font-size:14px; color:var(--bone); }
+.mod-row .m-desc{ color:var(--steel); font-size:12px; margin-top:2px; }
+.mod-cost{
+  font-family:'IBM Plex Mono'; font-size:12px; font-weight:600; white-space:nowrap; letter-spacing:0.02em;
+  padding:3px 9px; border:1px solid; flex-shrink:0;
+}
+.mod-cost.pos{ color:var(--danger); border-color:var(--danger); }
+.mod-cost.neg{ color:var(--olive); border-color:var(--olive); }
+.mods-legend{ display:flex; gap:18px; margin-top:16px; font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--steel); flex-wrap:wrap; }
+.mods-legend span{ display:flex; align-items:center; gap:6px; }
+.mods-legend i{ width:10px; height:10px; display:inline-block; }
+.mods-legend i.pos{ background:var(--danger); }
+.mods-legend i.neg{ background:var(--olive); }
+
+/* footer */
+footer{ padding:40px 0 60px; }
+.footer-grid{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:flex-start; }
+footer p{ color:var(--steel); font-size:12.5px; max-width:460px; font-family:'IBM Plex Mono'; line-height:1.7; }
+footer .brand{ margin-bottom:10px; }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .ticker-track{ animation:none; }
+  .extract-head .live::before{ animation:none; }
+}
+
+/* focus visibility */
+a:focus-visible, .btn:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+</style>
 </head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGBBM09F3J"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-DGBBM09F3J');
-</script>
-
 <body>
 
-    <div id="sidebar">
-        <button id="sidebar-toggle-btn" onclick="toggleSidebar()" title="사이드바 접기/펼치기">◀</button>
+<div class="ticker-bar">
+  <div class="ticker-track mono">
+    RAID BRIEFING <span>//</span> NORVINSK, REGION DE TARKOV <span>//</span> STATUT : CONFLIT ACTIF <span>//</span> PMC USEC/BEAR EN OPÉRATION <span>//</span> SITE NON OFFICIEL — FAN CONTENT <span>//</span> RESTEZ VIVANT <span>//</span>
+  </div>
+</div>
 
-        <div class="sidebar-header">
-            <h2 id="ui-title"></h2>
-            <div class="sub-title-row">
-                <span id="ui-subtitle" class="sub-title"></span>
-                <select id="lang-switch-select" class="lang-btn lang-select" onchange="switchLang(this.value)" aria-label="Language"></select>
-            </div>
+<header class="site">
+  <nav>
+    <div class="brand"><span class="dot"></span>NORVINSK.INTEL</div>
+    <ul class="navlinks">
+      <li><a href="./fr.html">Carte</a></li>
+      <li><a href="#jeu">Le jeu</a></li>
+      <li><a href="#maps">Cartes</a></li>
+      <li><a href="#actus">Actus</a></li>
+      <li><a href="#saison">Perso saisonnier</a></li>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#traders">Marchands</a></li>
+      <li><a href="#tips">Astuces</a></li>
+    </ul>
+  </nav>
+</header>
 
-            <select id="map-select" class="map-select-box" onchange="switchMap(this.value)"></select>
-
-            <div id="map-spawn-summary" class="map-spawn-summary"></div>
-        </div>
-
-        <div class="filter-section">
-            <h3 id="ui-categories-header"></h3>
-            <div id="category-filters"></div>
-        </div>
-
-        <div class="sidebar-footer">
-            <span id="ui-copyright"></span>
-        </div>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">DOSSIER FAN — NON AFFILIÉ À BATTLESTATE GAMES</div>
+    <h1>SURVIVRE À <span class="accent">TARKOV</span><br>N'EST PAS UN DROIT.</h1>
+    <p class="lead">Tout ce qu'un PMC a besoin de savoir avant d'entrer en raid : les cartes, les marchands, les bases pour débuter et les dernières nouvelles de Norvinsk. Fait par un fan, pour les fans.</p>
+    <div class="hero-ctas">
+      <a href="./fr.html?map=factory" class="btn">Carte Battle Pass</a>
+      <a href="#guide" class="btn ghost">Commencer le guide</a>
+      <a href="#maps" class="btn ghost">Voir les cartes</a>
     </div>
 
-    <div id="map-container">
-        <div id="map"></div>
-        <div id="coord-overlay"></div>
-    </div>
-
-    <div id="global-category-preview">
-        <img id="global-preview-img" src="" alt="preview" loading="lazy" decoding="async" />
-        <div id="global-preview-desc"></div>
-    </div>
-
-    <div id="detail-modal" class="modal-backdrop">
-        <div class="modal-content">
-            <button class="modal-close-btn" onclick="closeDetailModal()">&times;</button>
-            <div id="modal-body"></div>
+    <div class="extract-board">
+      <div class="extract-head">
+        <span>QUIZ D'EXTRACTION — TESTE TA MÉMOIRE</span>
+        <span class="score">SCORE : <span id="quizScore">0</span> / <span id="quizTotal">0</span></span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-prompt">Sur quelle carte se trouve cette extraction ?</div>
+        <div class="quiz-extract-name" id="quizExtractName">—</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-footer">
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="quiz-next" id="quizNext">Suivant →</button>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="jeu">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Briefing</span>
+      <h2>C'est quoi, Escape from Tarkov ?</h2>
+      <p>Un FPS d'extraction hardcore signé Battlestate Games, sorti en accès anticipé puis passé en version 1.0. Vous incarnez un PMC (mercenaire privé) largué dans des raids sur la région fictive de Norvinsk, avec un seul objectif : looter, survivre, extraire — et garder ce que vous ramenez.</p>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-card">
+        <h3>Deux factions</h3>
+        <p>USEC et BEAR s'affrontent pour le contrôle de Tarkov. Le choix influence surtout votre style visuel et certaines quêtes, mais le danger reste le même des deux côtés.</p>
+      </div>
+      <div class="intro-card">
+        <h3>Tout se perd, tout se gagne</h3>
+        <p>Mourir en raid, c'est perdre tout ce que vous portiez (sauf ce qui est sécurisé). Extraire, c'est ramener ce loot dans votre stash pour l'utiliser, le vendre ou l'équiper.</p>
+      </div>
+      <div class="intro-card">
+        <h3>Les Scavs</h3>
+        <p>Entre deux vies de PMC, vous pouvez jouer un Scav : un pillard local sans grand-chose à perdre, parfait pour looter vite sans risquer votre équipement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="maps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Cartographie</span>
+      <h2>Les cartes de Norvinsk</h2>
+      <p>Chaque carte a son propre rythme, ses propres pièges et ses propres points d'extraction. Voici un aperçu pour choisir où aller looter.</p>
+    </div>
+    <div class="maps-grid">
+
+      <div class="map-card">
+        <h3>Factory</h3>
+        <div class="map-meta"><span class="pill">Très petite</span><span class="pill">CQC</span></div>
+        <p>Le baptême du feu. Couloirs serrés, fusillades au fusil à pompe, parfaite pour apprendre les bases sans trop marcher.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=factory">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Customs</h3>
+        <div class="map-meta"><span class="pill">Moyenne</span><span class="pill">Polyvalente</span></div>
+        <p>La carte la plus jouée. Entrepôts, gare, chantier Dorms — un mélange de loot correct et de PvP constant.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=customs">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Woods</h3>
+        <div class="map-meta"><span class="pill">Grande</span><span class="pill">Longue portée</span></div>
+        <p>Forêts denses, snipers postés en hauteur, camp Scav à surveiller. Les grands espaces favorisent la prudence.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=woods">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Interchange</h3>
+        <div class="map-meta"><span class="pill">Grande</span><span class="pill">Centre commercial</span></div>
+        <p>Un centre commercial géant plein de loot technique, mais aussi un Boss coriace et beaucoup de monde au même endroit.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=interchange">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Shoreline</h3>
+        <div class="map-meta"><span class="pill">Très grande</span><span class="pill">Sanatorium</span></div>
+        <p>Littoral et forêt autour d'un immense sanatorium truffé de loot médical et technique. Idéale pour progresser en groupe.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=shoreline">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Reserve</h3>
+        <div class="map-meta"><span class="pill">Moyenne</span><span class="pill">Militaire</span></div>
+        <p>Ancienne base militaire souterraine avec du loot haut de gamme, mais un accès verrouillé derrière des clés et des quêtes.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=reserve">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Lighthouse</h3>
+        <div class="map-meta"><span class="pill">Grande</span><span class="pill">Côtière</span></div>
+        <p>Falaises, phare, et une zone gardée par des Rogues surarmés. Terrain de chasse du marchand Lightkeeper.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=lighthouse">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Streets of Tarkov</h3>
+        <div class="map-meta"><span class="pill">Immense</span><span class="pill">Urbaine verticale</span></div>
+        <p>Le cœur de la ville : immeubles, sous-sols, verticalité extrême. La carte la plus dense et la plus dangereuse à l'aveugle.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <a class="map-link" href="./fr.html?map=streets_of_tarkov">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>Ground Zero</h3>
+        <div class="map-meta"><span class="pill">Petite/moyenne</span><span class="pill">Bas niveau</span></div>
+        <p>Zone de départ pensée pour les PMC débutants, au centre de Tarkov, avant d'affronter les cartes plus exigeantes.</p>
+        <div class="difficulty"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=ground_zero">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card">
+        <h3>The Lab</h3>
+        <div class="map-meta"><span class="pill">Moyenne</span><span class="pill">Accès restreint</span></div>
+        <p>Un laboratoire souterrain à accès contrôlé, réservé aux joueurs équipés à fond. Loot d'élite, danger maximal.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <a class="map-link" href="./fr.html?map=lab">Spawns Battle Pass →</a>
+      </div>
+
+      <div class="map-card new">
+        <h3>Icebreaker</h3>
+        <div class="map-meta"><span class="pill">Verticale</span><span class="pill">Navire nucléaire</span></div>
+        <p>Nouvelle carte 2026 : un brise-glace nucléaire échoué près des côtes, gameplay très vertical, dangers environnementaux et boss inédit.</p>
+        <div class="difficulty"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <a class="map-link" href="./fr.html?map=icebreaker">Spawns Battle Pass →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="actus">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Rapport de terrain</span>
+      <h2>Actus 2026</h2>
+      <p>Ce qui bouge à Norvinsk ces derniers mois.</p>
+    </div>
+    <div class="log-list">
+      <div class="log-item">
+        <span class="date">MI-2026</span>
+        <h4>Icebreaker déployée</h4>
+        <p>La carte la plus attendue de l'année est enfin en jeu : un navire brise-glace nucléaire, avec radiations, codes d'accès physiques et un chef de faction inédit à abattre.</p>
+      </div>
+      <div class="log-item">
+        <span class="date">ÉTÉ 2026</span>
+        <h4>Kord Breach — première saison PvP</h4>
+        <p>Battlestate lance sa première structure saisonnière : profil frais, quêtes de saison et récompenses type battle pass, liée à la trame Black Division.</p>
+      </div>
+      <div class="log-item">
+        <span class="date">2026</span>
+        <h4>Système de ranimation en approche</h4>
+        <p>Une refonte attendue permettra de ranimer un coéquipier à terre au lieu d'une mort instantanée — un vrai changement pour le jeu en groupe.</p>
+      </div>
+      <div class="log-item">
+        <span class="date">FIN D'ANNÉE 2026</span>
+        <h4>End of Line annoncée</h4>
+        <p>Une future carte resserrée en station de métro, misant sur la faible visibilité et les combats rapprochés, complète la feuille de route.</p>
+      </div>
+      <div class="log-item">
+        <span class="date">EN PRÉPARATION</span>
+        <h4>DLC Scav Life</h4>
+        <p>Battlestate travaille sur une extension centrée sur la progression des Scavs, pour donner plus de profondeur à ce côté du jeu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="saison">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Nouveauté patch 1.1.0</span>
+      <h2>Kord Breach : le personnage de saison</h2>
+      <p>Avec la sortie de Kord Breach (3 août 2026), Tarkov introduit sa toute première saison : un personnage à part, séparé de votre PMC permanent, avec son propre système de bonus et de malus à choisir dès la création.</p>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>window.CURRENT_LANG = 'ko';</script>
-    <script src="./js/i18n.js"></script>
-    <script src="./js/app.js"></script>
+    <div class="season-banner">
+      PMC saisonnier = personnage optionnel, PvP uniquement, indépendant de votre stash / hideout / Kappa habituels. Le personnage saisonnier a un objectif : réinitialiser la difficulté d'un coup avec un ruleset de saison, sans toucher à votre progression permanente.
+    </div>
+
+    <div class="season-two-col">
+      <div class="global-panel">
+        <h3>Modificateurs globaux <span>— automatiques, gratuits, imposés à tous</span></h3>
+        <div class="global-row">
+          <div class="g-name">No Insurance</div>
+          <p>Impossible d'assurer le moindre objet pendant toute la saison.</p>
+        </div>
+        <div class="global-row">
+          <div class="g-name">Armor Shortage</div>
+          <p>Les marchands vendent nettement moins d'armures.</p>
+        </div>
+        <div class="global-row">
+          <div class="g-name">Black Division</div>
+          <p>Des opérateurs de la faction Black Division peuvent apparaître sur certaines cartes.</p>
+        </div>
+        <div class="global-row">
+          <div class="g-name">Handyman</div>
+          <p>Le craft est 50% plus rapide et la compétence Crafting démarre au niveau 51.</p>
+        </div>
+        <div class="global-row">
+          <div class="g-name">No FiR pour le Hideout</div>
+          <p>Les améliorations du hideout n'exigent plus d'objets trouvés en raid.</p>
+        </div>
+        <div class="global-row">
+          <div class="g-name">Seasoned PMCs</div>
+          <p>+25% d'expérience gagnée en raid pendant toute la saison.</p>
+        </div>
+      </div>
+
+      <div class="mods-panel">
+        <h3>Modificateurs personnels — bonus &amp; malus</h3>
+        <div class="sub">À la création, vous répartissez un budget de points : les bonus coûtent des points, les malus en rapportent. Le solde final doit rester à zéro ou plus — et le choix est verrouillé pour toute la saison.</div>
+        <div class="mods-list">
+          <div class="mod-row pos">
+            <div><div class="m-name">Bushborne</div><div class="m-desc">Furtivité et mobilité accrues dans les buissons</div></div>
+            <div class="mod-cost pos">− 5 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">Hercules</div><div class="m-desc">Force et Endurance au niveau 15 dès le départ</div></div>
+            <div class="mod-cost pos">− 3 pts</div>
+          </div>
+          <div class="mod-row pos">
+            <div><div class="m-name">The Tarkov Shooter</div><div class="m-desc">Compétence fusils à verrou x2, démarre au niveau 10</div></div>
+            <div class="mod-cost pos">− coût variable</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">No Flea Market</div><div class="m-desc">Accès au marché aux puces totalement désactivé</div></div>
+            <div class="mod-cost neg">+ 6 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Exhaustion</div><div class="m-desc">Fatigue et faim se vident plus vite qu'en temps normal</div></div>
+            <div class="mod-cost neg">+ 4 pts</div>
+          </div>
+          <div class="mod-row neg">
+            <div><div class="m-name">Allergic</div><div class="m-desc">Deux types d'objets consommables deviennent inutilisables</div></div>
+            <div class="mod-cost neg">+ 3 pts</div>
+          </div>
+        </div>
+        <div class="mods-legend">
+          <span><i class="pos"></i>Bonus (coûte des points)</span>
+          <span><i class="neg"></i>Malus (rapporte des points)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guide">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Tutoriel</span>
+      <h2>Guide du premier raid</h2>
+      <p>Les six étapes pour arrêter de mourir bêtement dans les dix premières minutes.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <div>
+          <h4>Choisissez votre PMC</h4>
+          <p>USEC ou BEAR : le choix est surtout esthétique et narratif. Ne vous prenez pas la tête, vous pourrez toujours recommencer un wipe avec l'autre faction.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <div>
+          <h4>Partez léger sur les premières cartes</h4>
+          <p>Ground Zero et Factory sont pensées pour apprendre : moins de distance à couvrir, moins de risque de tomber sur un joueur surarmé sans le voir venir.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <div>
+          <h4>Repérez au moins deux points d'extraction avant d'entrer</h4>
+          <p>Sur les cartes officielles, mémorisez un point d'extraction principal et un point de secours. Improviser sa sortie est la première cause de mort évitable.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <div>
+          <h4>Bougez lentement, écoutez tout</h4>
+          <p>Le son est l'information la plus précieuse du jeu : pas, portes, chargeurs qu'on éjecte. Marchez accroupi dans les zones fermées plutôt que de courir.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">05</div>
+        <div>
+          <h4>Ne looter que ce que vous pouvez porter</h4>
+          <p>Un sac trop lourd vous ralentit et vous épuise plus vite. Priorisez les objets petits et chers plutôt que de tout ramasser sans réfléchir.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">06</div>
+        <div>
+          <h4>Acceptez de perdre du matos</h4>
+          <p>Vous allez mourir souvent au début, avec de l'équipement dessus. C'est normal et attendu : le jeu se construit sur cette tension, pas malgré elle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="traders">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Économie</span>
+      <h2>Les marchands</h2>
+      <p>Chaque marchand a sa spécialité. Monter leur niveau de fidélité débloque de meilleurs objets et de meilleurs prix.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Marchand</th><th>Spécialité</th><th>Bon pour</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Prapor</td><td class="spec">Armes et munitions russes/soviétiques</td><td class="spec">Débuter sans se ruiner</td></tr>
+          <tr><td>Therapist</td><td class="spec">Médical, alimentation</td><td class="spec">Se soigner et manger correctement</td></tr>
+          <tr><td>Skier</td><td class="spec">Armes et équipement occidentaux</td><td class="spec">Monter en gamme côté OTAN</td></tr>
+          <tr><td>Peacekeeper</td><td class="spec">Devise en dollars, gear OTAN premium</td><td class="spec">Les joueurs qui économisent en dollars</td></tr>
+          <tr><td>Mechanic</td><td class="spec">Modding d'armes, pièces</td><td class="spec">Construire ses propres montages</td></tr>
+          <tr><td>Ragman</td><td class="spec">Armures, sacs, vêtements</td><td class="spec">Améliorer sa protection et son stockage</td></tr>
+          <tr><td>Jaeger</td><td class="spec">Chasse, munitions spéciales</td><td class="spec">Débloqué via une quête, très utile en mid-game</td></tr>
+          <tr><td>Lightkeeper</td><td class="spec">Objets rares liés à Lighthouse</td><td class="spec">Joueurs avancés, accès via quêtes spécifiques</td></tr>
+          <tr><td>Fence</td><td class="spec">Marché fourre-tout</td><td class="spec">Vendre ou racheter en urgence, prix variables</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="tips" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Fiche de poche</span>
+      <h2>Raccourcis &amp; loot prioritaire</h2>
+    </div>
+    <div class="two-col">
+      <div class="kb-panel">
+        <h3>Raccourcis essentiels</h3>
+        <div class="kb-row"><span>Position accroupie</span><span class="key">Ctrl</span></div>
+        <div class="kb-row"><span>Marche silencieuse</span><span class="key">Maj (maintenu)</span></div>
+        <div class="kb-row"><span>Position penchée</span><span class="key">Q / E</span></div>
+        <div class="kb-row"><span>Retenir la respiration (visée)</span><span class="key">Clic droit maintenu</span></div>
+        <div class="kb-row"><span>Ouvrir l'inventaire</span><span class="key">Tab</span></div>
+        <div class="kb-row"><span>Vérifier une arme (munitions)</span><span class="key">Clic droit sur l'arme</span></div>
+        <div class="kb-row"><span>Interagir / fouiller</span><span class="key">F</span></div>
+        <div class="kb-row"><span>Bandage rapide</span><span class="key">Menu médical</span></div>
+      </div>
+      <div class="loot-panel">
+        <h3>Petit loot toujours rentable</h3>
+        <div class="loot-item"><b>Cartes graphiques</b> légères et très chères</div>
+        <div class="loot-item"><b>Montres de luxe</b> minuscules, valeur élevée</div>
+        <div class="loot-item"><b>Piles bouton / LEDX</b> demandées pour le hideout</div>
+        <div class="loot-item"><b>Bijoux</b> poids nul, revente fiable</div>
+        <div class="loot-item"><b>Disques durs / SSD</b> compacts, toujours utiles</div>
+        <div class="loot-item"><b>Clés de map</b> rentables si le point est connu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand stencil">NORVINSK.INTEL</div>
+      <p>Site créé par un fan pour la communauté francophone d'Escape from Tarkov. Non affilié à, ni approuvé par Battlestate Games. Toutes les marques citées appartiennent à leurs propriétaires respectifs.</p>
+    </div>
+    <div>
+      <div class="brand stencil" style="font-size:14px;">CARTE BATTLE PASS</div>
+      <p><a href="./fr.html?map=factory">Français</a> · <a href="./en.html?map=factory">English</a> · <a href="./ko.html?map=factory">한국어</a></p>
+    </div>
+    <p>DERNIÈRE MISE À JOUR DU DOSSIER : AOÛT 2026<br>RESTEZ DISCRET. RESTEZ VIVANT.</p>
+  </div>
+</footer>
+
+<script>
+  // Extractions bien établies, par carte (base d'un fan, à vérifier en jeu en cas de doute)
+  const quizData = [
+    { extract: "Trailer Park", map: "Customs" },
+    { extract: "Crossroads", map: "Customs" },
+    { extract: "Old Gas Station", map: "Customs" },
+    { extract: "Outskirts", map: "Woods" },
+    { extract: "RUAF Roadblock", map: "Woods" },
+    { extract: "Scav House", map: "Woods" },
+    { extract: "Gate 3", map: "Factory" },
+    { extract: "Cellars", map: "Factory" },
+    { extract: "Tunnel", map: "Shoreline" },
+    { extract: "Railway", map: "Interchange" },
+    { extract: "Power Line", map: "Interchange" },
+    { extract: "Lighthouse Saferoom", map: "Lighthouse" },
+  ];
+
+  const allMaps = ["Customs","Woods","Factory","Shoreline","Interchange","Reserve","Lighthouse","Streets of Tarkov","The Lab"];
+
+  let pool = [];
+  let score = 0;
+  let total = 0;
+  let locked = false;
+
+  const nameEl = document.getElementById('quizExtractName');
+  const optionsEl = document.getElementById('quizOptions');
+  const feedbackEl = document.getElementById('quizFeedback');
+  const nextBtn = document.getElementById('quizNext');
+  const scoreEl = document.getElementById('quizScore');
+  const totalEl = document.getElementById('quizTotal');
+
+  function refillPool(){
+    pool = [...quizData].sort(() => Math.random() - 0.5);
+  }
+
+  function shuffle(arr){
+    return [...arr].sort(() => Math.random() - 0.5);
+  }
+
+  function nextQuestion(){
+    locked = false;
+    nextBtn.style.display = 'none';
+    feedbackEl.textContent = '';
+
+    if (pool.length === 0) refillPool();
+    const q = pool.pop();
+
+    nameEl.textContent = q.extract;
+
+    const distractors = shuffle(allMaps.filter(m => m !== q.map)).slice(0,3);
+    const options = shuffle([q.map, ...distractors]);
+
+    optionsEl.innerHTML = '';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => handleAnswer(btn, opt, q.map));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function handleAnswer(btn, chosen, correct){
+    if (locked) return;
+    locked = true;
+    total++;
+    totalEl.textContent = total;
+
+    const allBtns = optionsEl.querySelectorAll('.quiz-opt');
+    allBtns.forEach(b => {
+      b.disabled = true;
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+
+    if (chosen === correct){
+      score++;
+      scoreEl.textContent = score;
+      feedbackEl.textContent = 'Correct — bon PMC.';
+    } else {
+      btn.classList.add('wrong');
+      feedbackEl.textContent = `Raté — c'était ${correct}.`;
+    }
+
+    nextBtn.style.display = 'inline-block';
+  }
+
+  nextBtn.addEventListener('click', nextQuestion);
+  nextQuestion();
+</script>
+
 </body>
 </html>

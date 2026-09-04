@@ -50,7 +50,7 @@ function updateLangSwitchUrl() {
 function switchLang(langCode) {
     const target = (typeof getLangTarget === 'function')
         ? getLangTarget(langCode)
-        : (langCode === 'ko' ? './index.html' : `./${langCode}.html`);
+        : (langCode === 'ko' ? './ko.html' : `./${langCode}.html`);
     window.location.href = `${target}?map=${currentMapId}`;
 }
 

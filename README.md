@@ -2,9 +2,9 @@
 
 Fork francophone de [Perofunyang/battlepass_interactive_map](https://github.com/Perofunyang/battlepass_interactive_map).
 
-# **[Démo en ligne / Live Demo](https://coyotte-hue.github.io/battlepass_interactive_map/fr.html)**
+# **[Accueil fansite / Home](https://coyotte-hue.github.io/battlepass_interactive_map/)**
 
-Pages : [Français](https://coyotte-hue.github.io/battlepass_interactive_map/fr.html) · [English](https://coyotte-hue.github.io/battlepass_interactive_map/en.html) · [한국어](https://coyotte-hue.github.io/battlepass_interactive_map/)
+Pages carte : [Français](https://coyotte-hue.github.io/battlepass_interactive_map/fr.html) · [English](https://coyotte-hue.github.io/battlepass_interactive_map/en.html) · [한국어](https://coyotte-hue.github.io/battlepass_interactive_map/ko.html)
 
 ### 📌 Le projet
 
@@ -18,7 +18,8 @@ Carte interactive web des positions de spawn des documents Battle Pass de Escape
 
 ### 📁 Structure
 
-- `fr.html` / `en.html` / `index.html` : pages FR / EN / KO
+- `index.html` : accueil fansite NORVINSK.INTEL (guide, cartes, marchands, quiz) avec liens vers la carte
+- `fr.html` / `en.html` / `ko.html` : carte interactive FR / EN / KO
 - `js/i18n.js` : traductions (KO, EN, FR)
 - `js/app.js` : logique carte (Leaflet)
 - `data/*.js` : positions des spawns par map (descriptions d'origine en coréen, `detailDesc`)

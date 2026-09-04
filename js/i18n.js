@@ -42,7 +42,7 @@ const I18N = {
         title: "Battle Pass Doc Map",
         subtitle: "Escape From Tarkov",
         langBtnText: "🌐 KO",
-        langBtnTarget: "./index.html",
+        langBtnTarget: "./ko.html",
         categoriesHeader: "Categories",
         raidSpawnsTitle: "🎲 Raid Spawns",
         coordText: (y, x) => `Y: ${y}, X: ${x} (Click to Copy)`,
@@ -125,5 +125,5 @@ const AVAILABLE_LANGS = [
 ];
 
 function getLangTarget(langCode) {
-    return langCode === 'ko' ? './index.html' : `./${langCode}.html`;
+    return langCode === 'ko' ? './ko.html' : `./${langCode}.html`;
 }
