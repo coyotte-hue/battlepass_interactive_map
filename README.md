@@ -1,15 +1,31 @@
-## 🗺️ Escape From Tarkov: Battle Pass Document Interactive Map
-## 🎯 타르코프 배틀패스 문서 인터랙티브 맵
+## 🗺️ Escape From Tarkov : Carte interactive des documents Battle Pass
 
-# **[Live Demo / 웹사이트](https://perofunyang.github.io/battlepass_interactive_map/)**
+Fork francophone de [Perofunyang/battlepass_interactive_map](https://github.com/Perofunyang/battlepass_interactive_map).
 
-### 📌 About The Project
-Web base interactive map service for Escape From Tarkov Battle Pass Documentation.
+# **[Démo en ligne / Live Demo](https://coyotte-hue.github.io/battlepass_interactive_map/fr.html)**
 
-### 📌 프로젝트 소개
-이스케이프 프롬 타르코프(Escape From Tarkov)의 배틀 패스 위치를 한눈에 확인하고 탐색할 수 있는 웹 기반 인터랙티브 지도 서비스입니다.
+Pages : [Français](https://coyotte-hue.github.io/battlepass_interactive_map/fr.html) · [English](https://coyotte-hue.github.io/battlepass_interactive_map/en.html) · [한국어](https://coyotte-hue.github.io/battlepass_interactive_map/)
 
-## ⚖️ License & Disclaimer / 라이선스 안내
-- **Code & Content License**: [CC BY-NC 4.0 (비상업적 이용만 허용)](https://creativecommons.org/licenses/by-nc/4.0/)
-- **Disclaimer**: This project is an unofficial fan-made tool. Game assets, map images, and trademarks related to *Escape From Tarkov* belong to **Battlestate Games**.  
-(본 프로젝트는 비공식 팬 메이드 도구입니다. 게임 관련 모든 상표 및 이미지 저작권은 **Battlestate Games**에 있습니다.)
+### 📌 Le projet
+
+Carte interactive web des positions de spawn des documents Battle Pass de Escape From Tarkov : Technical, PMC, Project, Blueprints, Test, User, Medical, Financial, sur toutes les maps (Customs, Factory, Ground Zero, Interchange, Icebreaker, Lab, Labyrinth, Lighthouse, Reserve, Shoreline, Streets of Tarkov, Woods).
+
+### ✨ Ce fork ajoute
+
+- Page **française** (`fr.html`) + sélecteur 3 langues KO / EN / FR
+- **Mobile** : sidebar en tiroir, cibles tactiles 44px, modale bottom-sheet
+- **Perf** : `loading="lazy"` sur marqueurs, previews et modales
+
+### 📁 Structure
+
+- `fr.html` / `en.html` / `index.html` : pages FR / EN / KO
+- `js/i18n.js` : traductions (KO, EN, FR)
+- `js/app.js` : logique carte (Leaflet)
+- `data/*.js` : positions des spawns par map (descriptions d'origine en coréen, `detailDesc`)
+- `assets/` : cartes, icônes, previews
+
+## ⚖️ Licence & avertissement
+
+- **Code & contenu** : [CC BY-NC 4.0 (usage non commercial uniquement)](https://creativecommons.org/licenses/by-nc/4.0/)
+- **Crédit** : projet d'origine © Perofunyang, conservé dans l'historique du fork.
+- **Avertissement** : outil de fan non officiel. Les assets, images de maps et marques liés à *Escape From Tarkov* appartiennent à **Battlestate Games**.
