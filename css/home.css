@@ -213,8 +213,8 @@ section.block{padding:70px 0;border-bottom:1px solid var(--line);position:relati
 .tabs{display:flex;gap:8px;margin:18px 0 14px;flex-wrap:wrap}
 .tab{font-family:var(--font-m);font-size:12px;letter-spacing:.05em;padding:10px 14px;border-radius:20px;border:1px solid var(--line);background:transparent;color:var(--steel);cursor:pointer}
 .tab.on{color:#111;background:var(--bone);border-color:var(--bone);font-weight:600}
-.tab.pos.on{background:var(--danger);border-color:var(--danger);color:#fff}
-.tab.neg.on{background:var(--olive);border-color:var(--olive);color:#111}
+.tab.pos.on{background:var(--olive);border-color:var(--olive);color:#111}
+.tab.neg.on{background:var(--danger);border-color:var(--danger);color:#fff}
 .two-col{display:grid;gap:14px}
 @media(min-width:900px){.two-col{grid-template-columns:.9fr 1.1fr}}
 .panel{background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:20px}
@@ -228,15 +228,15 @@ section.block{padding:70px 0;border-bottom:1px solid var(--line);position:relati
 .mods::-webkit-scrollbar{width:8px}
 .mods::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
 .mod{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:8px;padding:10px 12px}
-.mod.pos{border-left-color:var(--danger)}
-.mod.neg{border-left-color:var(--olive)}
+.mod.pos{border-left-color:var(--olive)}
+.mod.neg{border-left-color:var(--danger)}
 .mod b{font-size:13.5px;font-weight:600}
 .mod small{color:var(--steel);font-size:12px;display:block}
 .cost{font-family:var(--font-m);font-size:12px;font-weight:600;white-space:nowrap;padding:4px 9px;border:1px solid;border-radius:20px}
-.cost.pos{color:var(--danger);border-color:var(--danger)}
-.cost.neg{color:var(--olive);border-color:var(--olive)}
+.cost.pos{color:var(--olive);border-color:var(--olive)}
+.cost.neg{color:var(--danger);border-color:var(--danger)}
 .grp{position:sticky;top:0;font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;padding:8px 10px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;margin-top:6px}
-.grp.pos{color:var(--danger)}.grp.neg{color:var(--olive)}
+.grp.pos{color:var(--olive)}.grp.neg{color:var(--danger)}
 
 /* steps */
 .steps{display:grid;gap:10px}
