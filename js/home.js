@@ -1,4 +1,4 @@
-// NORVINSK.INTEL — Home Hub v2
+// © 2026 coyotte-hue — Page d'accueil originale NORVINSK.INTEL. Tous droits réservés. Reproduction interdite sans autorisation.
 (function(){
   var $ = function(s,c){ return (c||document).querySelector(s); };
   var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
