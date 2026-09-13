@@ -41,6 +41,22 @@
     { name: 'Moonshine', shortName: 'Moonshine', avg24hPrice: 198000, lastLowPrice: 192000, w: 2, h: 2, trend: -0.9, trader: 'Jaeger', traderPrice: 8900, icon: './assets/icons/user.webp' }
   ];
 
+  // Vraies images objets hébergées localement (wiki Tarkov, © Battlestate Games) — secours hors-ligne
+  var MARKET_IMGS = {
+    'Graphics card': './assets/market/gpu.png',
+    'LEDX Skin Transilluminator': './assets/market/ledx.png',
+    'Physical bitcoin': './assets/market/bitcoin.png',
+    'Military circuit board': './assets/market/circuit.png',
+    'Tetriz portable game': './assets/market/tetriz.png',
+    'Intelligence folder': './assets/market/intel.png',
+    'VPX Flash Storage Module': './assets/market/vpx.png',
+    'Gas analyzer': './assets/market/gas.png',
+    'Roler Submariner gold wrist watch': './assets/market/roler.png',
+    'GP coin': './assets/market/gpcoin.png',
+    'Military COFDM Wireless Signal Transmitter': './assets/market/cofdm.png',
+    'Moonshine': './assets/market/moonshine.png'
+  };
+
   var state = { mode: 'pvp', q: '', offline: false };
   var fmtN = new Intl.NumberFormat('fr-FR');
   function fmt(n) { return (n == null || n === 0) ? '—' : fmtN.format(n) + ' ₽'; }
@@ -50,7 +66,7 @@
 
   function skeletons(n) {
     var h = '';
-    for (var i = 0; i < (n || 8); i++) h += '<div class="m-skel"></div>';
+    for (var i = 0; i < (n || 8); i++) h += '<tr class="m-skel-row"><td colspan="5"><div class="m-skel-bar"></div></td></tr>';
     grid.innerHTML = h;
   }
 
@@ -71,13 +87,6 @@
     return item.avg24hPrice || item.lastLowPrice || item.basePrice || 0;
   }
 
-  function trendBadge(v) {
-    if (v == null || isNaN(v)) return '<span class="m-trend flat">48h —</span>';
-    var c = v > 0.05 ? 'up' : (v < -0.05 ? 'down' : 'flat');
-    var sign = v > 0 ? '+' : '';
-    return '<span class="m-trend ' + c + '">' + sign + Number(v).toFixed(1) + '%</span>';
-  }
-
   function initials(item) {
     var s = String(item.shortName || item.name || '?').trim();
     var p = s.split(/\s+/);
@@ -86,38 +95,37 @@
     return esc((a + b).toUpperCase());
   }
 
-  function cardHTML(item, offline) {
+  function rowHTML(item, offline) {
     var price = offline ? item.avg24hPrice : fleaPrice(item);
     var w = item.width || item.w || 1, h = item.height || item.h || 1;
-    var slots = Math.max(1, w * h);
-    var perSlot = price ? Math.round(price / slots) : 0;
     var tr = bestTrader(item);
-    var trend = offline ? item.trend : item.changeLast48hPercent;
-    var img = item.iconLink || item.gridImageLink || item.image512pxLink || '';
     var link = item.link || item.wikiLink || ('https://tarkov.dev/item/' + (item.id || ''));
-    var sub = item.shortName ? esc(item.shortName) + ' · ' + w + '×' + h + ' (' + slots + ' slot' + (slots > 1 ? 's' : '') + ')' : (w + '×' + h);
+    var img = item.iconLink || item.gridImageLink || item.image512pxLink || MARKET_IMGS[item.name] || '';
     var thumb = '<span class="m-mono">' + initials(item) + '</span>';
     if (img) thumb += '<img src="' + esc(img) + '" alt="" loading="lazy" onload="this.classList.add(\'ld\')" onerror="this.remove()">';
-    return '<a class="m-card" href="' + esc(link) + '" target="_blank" rel="noopener">' +
-      '<div class="m-top"><div class="m-thumb">' + thumb + '</div>' +
-      '<div><div class="m-name">' + esc(item.name) + (offline ? '<span class="m-off">INDICATIF</span>' : '') + '</div>' +
-      '<div class="m-sub">' + sub + '</div></div></div>' +
-      '<div class="m-price">' + fmt(price) + '<small>FLEA 24H</small></div>' +
-      '<div class="m-rows">' +
-      '<div class="m-row"><span>Dernier bas</span><b>' + fmt(item.lastLowPrice) + '</b></div>' +
-      '<div class="m-row"><span>₽ / slot</span><b>' + fmt(perSlot) + '</b></div>' +
-      '<div class="m-row"><span>Marchand max</span><b>' + (tr ? esc(tr.name) + ' · ' + fmtN.format(tr.price || 0) + ' ₽' : '—') + '</b></div>' +
-      '<div class="m-row"><span>Tendance 48h</span>' + trendBadge(trend) + '</div>' +
-      '</div>' +
-      '<span class="m-link">Fiche tarkov.dev →</span></a>';
+    var sub = (item.shortName ? esc(item.shortName) + ' · ' : '') + w + '×' + h + (offline ? '<span class="m-off">INDICATIF</span>' : '');
+    var profit = '—', pcls = '';
+    if (price && tr && tr.price) {
+      var p = Math.round(price * 0.95 - tr.price);
+      pcls = p >= 0 ? 'mt-profit-pos' : 'mt-profit-neg';
+      profit = (p >= 0 ? '+' : '') + fmtN.format(p) + ' ₽';
+    }
+    return '<tr>' +
+      '<td><div class="mt-item"><div class="mt-thumb">' + thumb + '</div>' +
+      '<div><div class="mt-name"><a href="' + esc(link) + '" target="_blank" rel="noopener">' + esc(item.name) + '</a></div>' +
+      '<div class="mt-sub">' + sub + '</div></div></div></td>' +
+      '<td class="mt-num"><div class="mt-big">' + (tr ? fmtN.format(tr.price || 0) + ' ₽' : '—') + '</div><div class="mt-trader">' + (tr ? esc(tr.name) : '') + '</div></td>' +
+      '<td class="mt-num"><div class="mt-big">' + fmt(price) + '</div><div class="mt-small">bas ' + fmt(item.lastLowPrice) + '</div></td>' +
+      '<td class="mt-num"><span class="' + pcls + '" title="Flea −5% de frais − prix marchand">' + profit + '</span></td>' +
+      '</tr>';
   }
 
   function render(list, offline) {
     if (!list || !list.length) {
-      grid.innerHTML = '<div class="m-empty">Aucun résultat — essayez « GPU », « LEDX », « bitcoin », « Tetriz ».</div>';
+      grid.innerHTML = '<tr><td colspan="5"><div class="m-empty">Aucun résultat — essayez « GPU », « LEDX », « bitcoin », « Tetriz ».</div></td></tr>';
       return;
     }
-    grid.innerHTML = list.map(function (it) { return cardHTML(it, offline); }).join('');
+    grid.innerHTML = list.map(function (it) { return rowHTML(it, offline); }).join('');
   }
 
   function cacheKey() { return 'norvinsk_market_' + state.mode + '_top_v1'; }
@@ -232,7 +240,7 @@
           render(f, true);
           setStatus('Recherche live indisponible — résultat indicatif hors-ligne');
         } else {
-          grid.innerHTML = '<div class="m-empty">tarkov.dev injoignable pour « ' + esc(q) + ' ». <a href="https://tarkov.dev/?search=' + encodeURIComponent(q) + '" target="_blank" rel="noopener" style="color:var(--amber)">Voir sur tarkov.dev →</a></div>';
+          grid.innerHTML = '<tr><td colspan="5"><div class="m-empty">tarkov.dev injoignable pour « ' + esc(q) + ' ». <a href="https://tarkov.dev/?search=' + encodeURIComponent(q) + '" target="_blank" rel="noopener" style="color:var(--amber)">Voir sur tarkov.dev →</a></div></td></tr>';
           setStatus('Erreur réseau — voir tarkov.dev directement');
         }
       });

@@ -19,7 +19,7 @@
 <link rel="icon" type="image/webp" href="./assets/icons/test.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="./css/home.css?v=2">
+<link rel="stylesheet" href="./css/home.css?v=3">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"NORVINSK.INTEL","inLanguage":"fr","url":"https://coyotte-hue.github.io/battlepass_interactive_map/","description":"Hub fan Escape from Tarkov : carte interactive Battle Pass, guide, cartes, marchands, saison Kord Breach."}
 </script>
@@ -35,7 +35,6 @@
   <nav class="nav" aria-label="Navigation principale">
     <a class="brand" href="#top"><span class="pulse"></span>NORVINSK.INTEL <small>HUB v2</small></a>
     <ul class="navlinks">
-      <li><a href="#marche">Marché</a></li>
       <li><a href="#jeu">Le jeu</a></li>
       <li><a href="#cartes">Cartes</a></li>
       <li><a href="#documents">Documents</a></li>
@@ -43,6 +42,7 @@
       <li><a href="#saison">Saison</a></li>
       <li><a href="#guide">Guide</a></li>
       <li><a href="#marchands">Marchands</a></li>
+      <li><a href="#marche">Marché</a></li>
       <li><a href="#astuces">Astuces</a></li>
     </ul>
     <div class="nav-cta">
@@ -57,7 +57,6 @@
   </nav>
 </header>
 <div id="drawer">
-  <a class="dlink" href="#marche">Marché flea <span>LIVE</span></a>
   <a class="dlink" href="#jeu">Le jeu <span>01</span></a>
   <a class="dlink" href="#cartes">Cartes <span>12</span></a>
   <a class="dlink" href="#documents">Documents <span>08</span></a>
@@ -65,6 +64,7 @@
   <a class="dlink" href="#saison">Saison <span>KORD</span></a>
   <a class="dlink" href="#guide">Guide <span>06</span></a>
   <a class="dlink" href="#marchands">Marchands <span>09</span></a>
+  <a class="dlink" href="#marche">Marché flea <span>LIVE</span></a>
   <a class="dlink" href="#astuces">Astuces + Quiz <span>★</span></a>
   <a class="dlink" href="./fr.html?map=factory">→ Ouvrir la carte interactive <span>FR/EN/KO</span></a>
 </div>
@@ -123,41 +123,6 @@
     </aside>
   </div>
 </div>
-
-<!-- MARCHÉ FLEA — live tarkov.dev -->
-<section class="block" id="marche">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="sec-eyebrow">Marché flea · live</span><h2>Le marché, comme sur tarkov.dev</h2><p>Prix flea en direct via l'API communautaire <strong>tarkov.dev</strong> : moyenne 24h, dernier prix bas, prix marchand, ratio ₽/slot. Idéal avant de vider votre sac.</p></div>
-    <div class="market-panel reveal">
-      <div class="market-toolbar">
-        <label class="search market-search"><span class="mono" style="color:var(--steel)">⌕</span><input id="marketSearch" type="search" placeholder="Chercher : GPU, LEDX, bitcoin, Tetriz…" aria-label="Chercher un objet du marché" autocomplete="off"></label>
-        <div class="market-modes" role="group" aria-label="Mode de jeu">
-          <button class="fbtn on" data-mode="pvp" type="button">PVP</button>
-          <button class="fbtn" data-mode="pve" type="button">PVE</button>
-        </div>
-        <button id="marketRefresh" class="btn sm ghost" type="button" title="Rafraîchir les prix">↻ Actualiser</button>
-      </div>
-      <div class="market-meta">
-        <span id="marketStatus" class="mono">Connexion à tarkov.dev…</span>
-        <span class="mono market-src">Source : <a href="https://tarkov.dev/" target="_blank" rel="noopener">tarkov.dev</a> · API GraphQL communautaire</span>
-      </div>
-      <div class="market-quick" aria-label="Recherches rapides">
-        <span class="mono" style="color:var(--steel-dim);font-size:11px">TOP :</span>
-        <button type="button" data-q="Graphics card">GPU</button>
-        <button type="button" data-q="LEDX">LEDX</button>
-        <button type="button" data-q="Bitcoin">Bitcoin</button>
-        <button type="button" data-q="Tetriz">Tetriz</button>
-        <button type="button" data-q="Military circuit">Circuit</button>
-        <button type="button" data-q="Gas analyzer">Analyseur</button>
-      </div>
-      <div class="market-grid" id="marketGrid" aria-live="polite"></div>
-      <div class="market-foot">
-        <p>Les prix fluctuent en continu. Cliquez sur un objet pour ouvrir sa fiche tarkov.dev (graphiques, barters, quêtes). Site fan non affilié — données © communauté tarkov.dev.</p>
-        <a href="https://tarkov.dev/" target="_blank" rel="noopener" class="btn sm">Ouvrir tarkov.dev →</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- JEU -->
 <section class="block" id="jeu">
@@ -337,6 +302,46 @@
   </div>
 </section>
 
+<!-- MARCHÉ FLEA — live tarkov.dev -->
+<section class="block" id="marche">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-eyebrow">Marché flea — 08 · live</span><h2>Le marché, comme sur tarkov.dev</h2><p>Prix flea en direct via l'API communautaire <strong>tarkov.dev</strong> : prix marchand, prix marché, profit instantané. Idéal avant de vider votre sac.</p></div>
+    <div class="market-panel reveal">
+      <div class="market-toolbar">
+        <label class="search market-search"><span class="mono" style="color:var(--steel)">⌕</span><input id="marketSearch" type="search" placeholder="Rechercher un article…" aria-label="Rechercher un article" autocomplete="off"></label>
+        <div class="market-modes" role="group" aria-label="Mode de jeu">
+          <button class="fbtn on" data-mode="pvp" type="button">PVP</button>
+          <button class="fbtn" data-mode="pve" type="button">PVE</button>
+        </div>
+        <button id="marketRefresh" class="btn sm ghost" type="button" title="Rafraîchir les prix">↻ Actualiser</button>
+      </div>
+      <div class="market-meta">
+        <span id="marketStatus" class="mono">Connexion à tarkov.dev…</span>
+        <span class="mono market-src">Source : <a href="https://tarkov.dev/" target="_blank" rel="noopener">tarkov.dev</a> · API GraphQL communautaire</span>
+      </div>
+      <div class="market-quick" aria-label="Recherches rapides">
+        <span class="mono" style="color:var(--steel-dim);font-size:11px">TOP :</span>
+        <button type="button" data-q="Graphics card">GPU</button>
+        <button type="button" data-q="LEDX">LEDX</button>
+        <button type="button" data-q="Bitcoin">Bitcoin</button>
+        <button type="button" data-q="Tetriz">Tetriz</button>
+        <button type="button" data-q="Military circuit">Circuit</button>
+        <button type="button" data-q="Gas analyzer">Analyseur</button>
+      </div>
+      <div class="market-table-wrap">
+        <table class="market-table">
+          <thead><tr><th></th><th>Nom</th><th style="text-align:right">Prix marchand</th><th style="text-align:right">Prix Marché</th><th style="text-align:right">Profit Instantané</th></tr></thead>
+          <tbody id="marketGrid" aria-live="polite"></tbody>
+        </table>
+      </div>
+      <div class="market-foot">
+        <p>Les prix fluctuent en continu. Cliquez sur un nom pour ouvrir sa fiche tarkov.dev (graphiques, barters, quêtes). Profit ≈ flea −5% de frais − prix marchand. Images objets : wiki Tarkov © Battlestate Games. Site fan non affilié.</p>
+        <a href="https://tarkov.dev/" target="_blank" rel="noopener" class="btn sm">Ouvrir tarkov.dev →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ASTUCES + QUIZ -->
 <section class="block" id="astuces" style="border-bottom:none">
   <div class="wrap">
@@ -387,7 +392,7 @@
   </div>
 </footer>
 <button id="toTop" aria-label="Haut de page">↑</button>
-<script src="./js/home.js?v=2" defer></script>
-<script src="./js/market.js?v=2" defer></script>
+<script src="./js/home.js?v=3" defer></script>
+<script src="./js/market.js?v=3" defer></script>
 </body>
 </html>
