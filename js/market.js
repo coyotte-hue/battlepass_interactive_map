@@ -78,6 +78,14 @@
     return '<span class="m-trend ' + c + '">' + sign + Number(v).toFixed(1) + '%</span>';
   }
 
+  function initials(item) {
+    var s = String(item.shortName || item.name || '?').trim();
+    var p = s.split(/\s+/);
+    var a = p[0].charAt(0) || '?';
+    var b = p[1] ? p[1].charAt(0) : (p[0].charAt(1) || '');
+    return esc((a + b).toUpperCase());
+  }
+
   function cardHTML(item, offline) {
     var price = offline ? item.avg24hPrice : fleaPrice(item);
     var w = item.width || item.w || 1, h = item.height || item.h || 1;
@@ -85,11 +93,13 @@
     var perSlot = price ? Math.round(price / slots) : 0;
     var tr = bestTrader(item);
     var trend = offline ? item.trend : item.changeLast48hPercent;
-    var img = item.iconLink || item.gridImageLink || item.image512pxLink || item.icon || './assets/icons/test.webp';
+    var img = item.iconLink || item.gridImageLink || item.image512pxLink || '';
     var link = item.link || item.wikiLink || ('https://tarkov.dev/item/' + (item.id || ''));
     var sub = item.shortName ? esc(item.shortName) + ' · ' + w + '×' + h + ' (' + slots + ' slot' + (slots > 1 ? 's' : '') + ')' : (w + '×' + h);
+    var thumb = '<span class="m-mono">' + initials(item) + '</span>';
+    if (img) thumb += '<img src="' + esc(img) + '" alt="" loading="lazy" onload="this.classList.add(\'ld\')" onerror="this.remove()">';
     return '<a class="m-card" href="' + esc(link) + '" target="_blank" rel="noopener">' +
-      '<div class="m-top"><img src="' + esc(img) + '" alt="" loading="lazy">' +
+      '<div class="m-top"><div class="m-thumb">' + thumb + '</div>' +
       '<div><div class="m-name">' + esc(item.name) + (offline ? '<span class="m-off">INDICATIF</span>' : '') + '</div>' +
       '<div class="m-sub">' + sub + '</div></div></div>' +
       '<div class="m-price">' + fmt(price) + '<small>FLEA 24H</small></div>' +
@@ -171,8 +181,8 @@
     var cached = readCache();
     if (cached) {
       state.offline = false;
-      render(sortFlea(cached.data).slice(0, 12), false);
-      setStatus(cached.data.length + ' objets · cache ' + state.mode.toUpperCase() + ' (' + ago(cached.ts) + ') · source tarkov.dev');
+      render(sortFlea(cached.data).slice(0, 8), false);
+      setStatus('Top 8 · cache ' + state.mode.toUpperCase() + ' (' + ago(cached.ts) + ') · source tarkov.dev');
     }
     fetchTop(state.mode).then(function (items) {
       items = sortFlea(items);
@@ -180,8 +190,8 @@
       writeCache(items);
       if (!state.q) {
         state.offline = false;
-        render(items.slice(0, 12), false);
-        setStatus(items.length + ' objets · live ' + state.mode.toUpperCase() + ' · MAJ à l\'instant · source tarkov.dev');
+        render(items.slice(0, 8), false);
+        setStatus('Top 8 · live ' + state.mode.toUpperCase() + ' · MAJ à l\'instant · source tarkov.dev');
       }
     }).catch(function () {
       if (!state.q && !cached) {

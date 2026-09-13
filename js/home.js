@@ -12,7 +12,7 @@
     if(prog) prog.style.width = p + '%';
     if(toTop) toTop.classList.toggle('show', h.scrollTop > 700);
     // active nav
-    var ids = ['jeu','cartes','documents','actus','saison','guide','marchands','marche','astuces'];
+    var ids = ['marche','jeu','cartes','documents','actus','saison','guide','marchands','astuces'];
     var cur = null;
     ids.forEach(function(id){
       var el = document.getElementById(id);
